@@ -27,6 +27,11 @@ USERNAME="<USERNAME>"
 PASSWORD="<PASSWORD>"
 ```
 
+Install dependencies
+```shell
+>>>poetry install
+```
+
 ## CLI
 
 The `WHOOP+` CLI allows you to graph trends across any of the following metrics:
@@ -44,8 +49,8 @@ Sleep Quality metrics: [sleep_performance_percentage,sleep_consistency_percentag
 By default, the CLI graphs 1 year of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
 
 ```shell
->>> poetry run python main.py graph_trends  
->>> Metric: [Select a metric from above]
+>>>poetry run python main.py graph_trends  
+>>>Metric: [Select a metric from above]
 ```
 
 ## API Requests
