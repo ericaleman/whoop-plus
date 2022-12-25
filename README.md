@@ -35,7 +35,7 @@ Get your login info
 
 ```python
 {
-    "user_id": 123,
+    "user_id": 26414,
     "email": "ericaleman@mail.com",
     "first_name": "Eric",
     "last_name": "Aleman"
@@ -50,7 +50,7 @@ Get your body measurements
 
 ```python
 {
-    "height_meter": 1.80,
+    "height_meter": 1.8,
     "weight_kilogram": 85.0,
     "max_heart_rate": 194
 }
@@ -58,7 +58,7 @@ Get your body measurements
 
 ### Get Cycle Collection
 
-Get your last n daily cycles.
+Get your last n daily cycles. WHOOP data model available at https://developer.whoop.com/docs/developing/user-data/cycle
 
 **Example Response**:
 
@@ -86,27 +86,27 @@ Get your last n daily cycles.
 
 ### Get Recovery Collection
 
-Get your last n daily recoveries.
+Get your last n daily recoveries. WHOOP data model available at https://developer.whoop.com/docs/developing/user-data/recovery
 
 **Example Response**:
 
 ```python
 [
     {
-        "cycle_id": 93845,
-        "sleep_id": 10235,
-        "user_id": 10129,
-        "created_at": "2022-04-24T11:25:44.774Z",
-        "updated_at": "2022-04-24T14:25:44.774Z",
-        "score_state": "SCORED",
-        "score": {
-            "user_calibrating": False,
-            "recovery_score": 44,
-            "resting_heart_rate": 64,
-            "hrv_rmssd_milli": 31.813562,
-            "spo2_percentage": 95.6875,
-            "skin_temp_celsius": 33.7
-        }
+       "cycle_id":311600261,
+       "sleep_id":571896726,
+       "user_id":26414,
+       "created_at":"2022-12-25T12:34:38.809Z",
+       "updated_at":"2022-12-25T12:34:40.534Z",
+       "score_state":"SCORED",
+       "score":{
+          "user_calibrating":false,
+          "recovery_score":89.0,
+          "resting_heart_rate":64.0,
+          "hrv_rmssd_milli":47.77199,
+          "spo2_percentage":96.2,
+          "skin_temp_celsius":32.9
+       }
     },
     ...
 ]
@@ -114,30 +114,44 @@ Get your last n daily recoveries.
 
 ### Get Sleep Collection
 
-Get your last n daily sleep cyles.
+Get your last n daily sleep cyles. WHOOP data model available at https://developer.whoop.com/docs/developing/user-data/sleep
 
 **Example Response**:
 
 ```python
 [
     {
-        "id": 93845,
-        "user_id": 10129,
-        "created_at": "2022-04-24T11:25:44.774Z",
-        "updated_at": "2022-04-24T14:25:44.774Z",
-        "start": "2022-04-24T02:25:44.774Z",
-        "end": "2022-04-24T10:25:44.774Z",
-        "timezone_offset": "-05:00",
-        "nap": False,
-        "score_state": "SCORED",
-        "score": {
-            "stage_summary": {},
-            "sleep_needed": {},
-            "respiratory_rate": 16.11328125,
-            "sleep_performance_percentage": 98,
-            "sleep_consistency_percentage": 90,
-            "sleep_efficiency_percentage": 91.69533848
-        }
+       "id":571896726,
+       "user_id":26414,
+       "created_at":"2022-12-25T12:34:38.809Z",
+       "updated_at":"2022-12-25T12:34:40.534Z",
+       "start":"2022-12-25T03:49:58.295Z",
+       "end":"2022-12-25T12:23:47.732Z",
+       "timezone_offset":"-05:00",
+       "nap":false,
+       "score_state":"SCORED",
+       "score":{
+          "stage_summary":{
+             "total_in_bed_time_milli":30597761,
+             "total_awake_time_milli":3770913,
+             "total_no_data_time_milli":0,
+             "total_light_sleep_time_milli":15362166,
+             "total_slow_wave_sleep_time_milli":4100720,
+             "total_rem_sleep_time_milli":7363962,
+             "sleep_cycle_count":5,
+             "disturbance_count":21
+          },
+          "sleep_needed":{
+             "baseline_milli":27504534,
+             "need_from_sleep_debt_milli":3182667,
+             "need_from_recent_strain_milli":191236,
+             "need_from_recent_nap_milli":0
+          },
+          "respiratory_rate":14.238281,
+          "sleep_performance_percentage":87.0,
+          "sleep_consistency_percentage":85.0,
+          "sleep_efficiency_percentage":87.67585
+       }
     },
     ...
 ]
@@ -145,7 +159,7 @@ Get your last n daily sleep cyles.
 
 ### Get Workout Collection
 
-Get your last n daily sleep cyles.
+Get your last n daily sleep cyles. WHOOP data model available at https://developer.whoop.com/docs/developing/user-data/workout
 
 **Example Response**:
 

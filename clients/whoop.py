@@ -3,6 +3,7 @@ from datetime import datetime, time, timedelta
 
 from backoff import expo, on_exception
 from ratelimit import RateLimitException, limits
+import pandas as pd
 
 from authlib.common.urls import extract_params
 from authlib.integrations.requests_client import OAuth2Session
@@ -19,16 +20,14 @@ HEADERS = {
     "Content-Type": "application/json",
 }
 
-
 def _auth_password_json(_client, _method, uri, headers, body):
     body = json.dumps(dict(extract_params(body)))
     headers["Content-Type"] = "application/json"
     return uri, headers, body
 
 
-class WhoopClient:
+class Whoop:
 
-    
     def __init__(self,username,password):
         self._username = username
         self._password = password
@@ -74,6 +73,73 @@ class WhoopClient:
         )
 
         return collection
+
+    def get_cycle_df(self,days):
+        """ 
+        Returns a pandas DF for querying cycle data
+        """
+        collection = []
+        nested_collection = self.get_collection(days,'cycle')
+        for item in nested_collection:
+            collection.append({
+                    'id' : item['id'],   
+                    'start' : item['start'], 
+                    'end' : item['end'], 
+                    'timezone_offset' : item['timezone_offset'],   
+                    'strain' : item['score']['strain'], 
+                    'calories' : item['score']['kilojoule'] * 0.239006, 
+                    'average_heart_rate' : item['score']['average_heart_rate'], 
+                    'max_heart_rate' : item['score']['max_heart_rate'], 
+                })  
+        return pd.DataFrame.from_records(collection)
+
+    def get_sleep_df(self,days):
+        """ 
+        Returns a pandas DF for querying sleep data
+        """
+        collection = []
+        nested_collection = self.get_collection(days,'sleep')
+        for item in nested_collection:
+            collection.append({
+                    'id' : item['id'], 
+                    'start' : item['start'], 
+                    'end' : item['end'], 
+                    'timezone_offset' : item['timezone_offset'],   
+                    'nap' : item['nap'],
+                    'total_in_bed_time_milli' : item['score']['stage_summary']['total_in_bed_time_milli'], 
+                    'total_awake_time_milli' : item['score']['stage_summary']['total_awake_time_milli'], 
+                    'total_no_data_time_milli' : item['score']['stage_summary']['total_no_data_time_milli'], 
+                    'total_light_sleep_time_milli' : item['score']['stage_summary']['total_light_sleep_time_milli'], 
+                    'total_slow_wave_sleep_time_milli' : item['score']['stage_summary']['total_slow_wave_sleep_time_milli'], 
+                    'total_rem_sleep_time_milli' : item['score']['stage_summary']['total_rem_sleep_time_milli'], 
+                    'sleep_cycle_count' : item['score']['stage_summary']['disturbance_count'], 
+                    'baseline_milli' : item['score']['sleep_needed']['baseline_milli'], 
+                    'need_from_sleep_debt_milli' : item['score']['sleep_needed']['need_from_sleep_debt_milli'], 
+                    'need_from_recent_strain_milli' : item['score']['sleep_needed']['need_from_recent_strain_milli'], 
+                    'need_from_recent_nap_milli' : item['score']['sleep_needed']['need_from_recent_nap_milli'], 
+                    'respiratory_rate' : item['score']['respiratory_rate'], 
+                    'sleep_performance_percentage' : item['score']['sleep_performance_percentage'], 
+                    'sleep_consistency_percentage' : item['score']['sleep_consistency_percentage'], 
+                    'sleep_efficiency_percentage' : item['score']['sleep_efficiency_percentage'], 
+                })  
+        return pd.DataFrame.from_records(collection)
+
+    def get_recovery_df(self,days):
+        """ 
+        Returns a pandas DF for querying recovery data
+        """
+        collection = []
+        nested_collection = self.get_collection(days,'recovery')
+        for item in nested_collection:
+            collection.append({
+                    'cycle_id' : item['cycle_id'], 
+                    'sleep_id' : item['sleep_id'], 
+                    'recovery_score' : item['score']['recovery_score'], 
+                    'hrv_rmssd_milli' : item['score']['hrv_rmssd_milli'],
+                    'spo2_percentage' : item['score']['spo2_percentage'], 
+                    'skin_temp_celsius' : item['score']['skin_temp_celsius'], 
+                })  
+        return pd.DataFrame.from_records(collection)
 
     def auth(self, **kwargs):
         """
