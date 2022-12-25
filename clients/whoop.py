@@ -58,6 +58,8 @@ class Whoop:
         """ 
         Returns last N daily WHOOP scores descending from most recent:
         """
+        if endpoint == 'cycle':
+            days -= 1
         start = (datetime.today() - timedelta(days=days)).isoformat() + "Z"
         end = datetime.today().isoformat() + "Z"
 
@@ -83,6 +85,7 @@ class Whoop:
         for item in nested_collection:
             collection.append({
                     'id' : item['id'],   
+                    'day' : datetime.fromisoformat(item['start'][:-1]).date(),
                     'start' : item['start'], 
                     'end' : item['end'], 
                     'timezone_offset' : item['timezone_offset'],   
@@ -113,7 +116,7 @@ class Whoop:
                     'total_slow_wave_sleep_time_milli' : item['score']['stage_summary']['total_slow_wave_sleep_time_milli'], 
                     'total_rem_sleep_time_milli' : item['score']['stage_summary']['total_rem_sleep_time_milli'], 
                     'sleep_cycle_count' : item['score']['stage_summary']['disturbance_count'], 
-                    'baseline_milli' : item['score']['sleep_needed']['baseline_milli'], 
+                    'need_from_baseline_milli' : item['score']['sleep_needed']['baseline_milli'], 
                     'need_from_sleep_debt_milli' : item['score']['sleep_needed']['need_from_sleep_debt_milli'], 
                     'need_from_recent_strain_milli' : item['score']['sleep_needed']['need_from_recent_strain_milli'], 
                     'need_from_recent_nap_milli' : item['score']['sleep_needed']['need_from_recent_nap_milli'], 
@@ -135,6 +138,7 @@ class Whoop:
                     'cycle_id' : item['cycle_id'], 
                     'sleep_id' : item['sleep_id'], 
                     'recovery_score' : item['score']['recovery_score'], 
+                    'resting_heart_rate' : item['score']['resting_heart_rate'], 
                     'hrv_rmssd_milli' : item['score']['hrv_rmssd_milli'],
                     'spo2_percentage' : item['score']['spo2_percentage'], 
                     'skin_temp_celsius' : item['score']['skin_temp_celsius'], 

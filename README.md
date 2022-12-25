@@ -5,6 +5,8 @@ Track long term trends in your health using your WHOOP device. Get your first mo
 ## Contents <!-- omit in toc -->
 
 - [Setup](#setup)
+- [CLI](#clo)
+  - [Using the CLI](#using-the-cli)
 - [API Requests](#api-requests)
   - [Get Basic Profile](#get-basic-profile)
   - [Get Body Measurements](#get-body-measurements)
@@ -21,6 +23,20 @@ Store your WHOOP email and password in a `.env` file:
 # WHOOP credentials
 USERNAME="<USERNAME>"
 PASSWORD="<PASSWORD>"
+```
+
+## CLI
+
+The `WHOOP+` CLI allows you to graph trends across any of the following metrics:
+```python
+Exertion metrics: [strain,calories]
+Exertion metrics: [strain,calories]
+```
+
+### Using the CLI
+```shell
+>>> poetry run python main.py graph_trends  
+>>> Metric: [Select a metric from above]
 ```
 
 ## API Requests
