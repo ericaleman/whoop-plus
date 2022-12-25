@@ -1,6 +1,6 @@
 # WHOOP+ <!-- omit in toc -->
 
-Track long term trends in your health using your WHOOP device. Get your first month with WHOOP free at https://join.whoop.com/46A8F8.
+Track long term trends in your health using your WHOOP device. Get your first month of WHOOP free at https://join.whoop.com/46A8F8.
 
 ## Contents <!-- omit in toc -->
 
