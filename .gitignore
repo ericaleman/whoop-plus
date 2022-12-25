@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+.vscode
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# iPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
