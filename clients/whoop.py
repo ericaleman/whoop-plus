@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, time, timedelta
+from contextlib import suppress
 
 from backoff import expo, on_exception
 from ratelimit import RateLimitException, limits
@@ -103,28 +104,32 @@ class Whoop:
         collection = []
         nested_collection = self.get_collection(days,'sleep')
         for item in nested_collection:
-            collection.append({
+            record = {
                     'id' : item['id'], 
                     'start' : item['start'], 
                     'end' : item['end'], 
                     'timezone_offset' : item['timezone_offset'],   
                     'nap' : item['nap'],
-                    'total_in_bed_time_milli' : item['score']['stage_summary']['total_in_bed_time_milli'], 
-                    'total_awake_time_milli' : item['score']['stage_summary']['total_awake_time_milli'], 
-                    'total_no_data_time_milli' : item['score']['stage_summary']['total_no_data_time_milli'], 
-                    'total_light_sleep_time_milli' : item['score']['stage_summary']['total_light_sleep_time_milli'], 
-                    'total_slow_wave_sleep_time_milli' : item['score']['stage_summary']['total_slow_wave_sleep_time_milli'], 
-                    'total_rem_sleep_time_milli' : item['score']['stage_summary']['total_rem_sleep_time_milli'], 
-                    'sleep_cycle_count' : item['score']['stage_summary']['disturbance_count'], 
-                    'need_from_baseline_milli' : item['score']['sleep_needed']['baseline_milli'], 
-                    'need_from_sleep_debt_milli' : item['score']['sleep_needed']['need_from_sleep_debt_milli'], 
-                    'need_from_recent_strain_milli' : item['score']['sleep_needed']['need_from_recent_strain_milli'], 
-                    'need_from_recent_nap_milli' : item['score']['sleep_needed']['need_from_recent_nap_milli'], 
-                    'respiratory_rate' : item['score']['respiratory_rate'], 
-                    'sleep_performance_percentage' : item['score']['sleep_performance_percentage'], 
-                    'sleep_consistency_percentage' : item['score']['sleep_consistency_percentage'], 
-                    'sleep_efficiency_percentage' : item['score']['sleep_efficiency_percentage'], 
-                })  
+                }
+            if item['score']:
+                if 'stage_summary' in item['score']:
+                    record['total_in_bed_time_milli'] = item['score']['stage_summary']['total_in_bed_time_milli']
+                    record['total_awake_time_milli'] = item['score']['stage_summary']['total_awake_time_milli']
+                    record['total_no_data_time_milli'] = item['score']['stage_summary']['total_no_data_time_milli']
+                    record['total_light_sleep_time_milli'] = item['score']['stage_summary']['total_light_sleep_time_milli'] 
+                    record['total_slow_wave_sleep_time_milli'] = item['score']['stage_summary']['total_slow_wave_sleep_time_milli']
+                    record['total_rem_sleep_time_milli'] = item['score']['stage_summary']['total_rem_sleep_time_milli']
+                    record['sleep_cycle_count'] = item['score']['stage_summary']['disturbance_count']
+                if 'sleep_needed' in item['score']:
+                    record['need_from_baseline_milli'] = item['score']['sleep_needed']['baseline_milli']
+                    record['need_from_sleep_debt_milli'] = item['score']['sleep_needed']['need_from_sleep_debt_milli']
+                    record['need_from_recent_strain_milli'] = item['score']['sleep_needed']['need_from_recent_strain_milli']
+                    record['need_from_recent_nap_milli'] = item['score']['sleep_needed']['need_from_recent_nap_milli']
+                record['respiratory_rate'] = item['score']['respiratory_rate']
+                record['sleep_performance_percentage'] = item['score']['sleep_performance_percentage']
+                record['sleep_consistency_percentage'] = item['score']['sleep_consistency_percentage']
+                record['sleep_efficiency_percentage'] = item['score']['sleep_efficiency_percentage']
+            collection.append(record)
         return pd.DataFrame.from_records(collection)
 
     def get_recovery_df(self,days):

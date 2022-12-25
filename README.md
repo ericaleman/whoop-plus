@@ -2,6 +2,8 @@
 
 Track long term trends in your health using your WHOOP device. Get your first month of WHOOP free at https://join.whoop.com/46A8F8.
 
+![plot](./examples/sleep_quality.png)
+
 ## Contents <!-- omit in toc -->
 
 - [Setup](#setup)
@@ -39,6 +41,8 @@ Sleep Quality metrics: [sleep_performance_percentage,sleep_consistency_percentag
 ```
 
 ### Using the CLI
+By default, the CLI graphs 1 year of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
+
 ```shell
 >>> poetry run python main.py graph_trends  
 >>> Metric: [Select a metric from above]
