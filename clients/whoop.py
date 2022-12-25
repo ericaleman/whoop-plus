@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 import json
 from datetime import datetime, time, timedelta
-from typing import Any
+
 from backoff import expo, on_exception
 from ratelimit import RateLimitException, limits
 

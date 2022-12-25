@@ -20,19 +20,5 @@ if __name__ == "__main__":
     body_measurements = client.get_body_measurement()
 
     # Get collection
-    collection = client.get_collection(1000, 'workout')
-    print(collection[-1])
-    # collection = client.get_collection(3, 'cycle')
-    # df = pd.DataFrame.from_records(collection)
-    # print(df)
-
-    # # Get collection
-    # collection = client.get_collection(3, 'recovery')
-    # df = pd.DataFrame.from_records(collection)
-    # print(df)
-
-    # # Get collection
-    # collection = client.get_collection(3, 'sleep')
-    # df = pd.DataFrame.from_records(collection)
-    # print(df)
-
+    collection = client.get_collection(30, 'cycle')
+    df = pd.DataFrame.from_records(collection)
