@@ -35,8 +35,8 @@ Exertion metrics: [strain,calories]
 Heart Rate metrics: [average_heart_rate,max_heart_rate,resting_heart_rate]
 Cardiovascular metrics: [respiratory_rate,hrv_rmssd_milli,spo2_percentage]
 Temperature metrics: [skin_temp_celsius]
-Sleep metrics: [total_in_bed_time_milli,total_awake_time_milli,total_no_data_time_milli,total_light_sleep_time_milli, total_slow_wave_sleep_time_milli, total_rem_sleep_time_milli, sleep_cycle_count]
-Sleep Need metrics: [need_from_baseline_milli,need_from_sleep_debt_milli,need_from_recent_strain_milli,need_from_recent_nap_milli]
+Sleep metrics: [total_in_bed_hours,total_awake_hours,total_sleep_hours,total_no_data_hours,total_light_sleep_hours, total_slow_wave_sleep_hours, total_rem_sleep_hours, sleep_cycle_count]
+Sleep Need metrics: [need_from_baseline_hours,need_from_sleep_debt_hours,need_from_recent_strain_hours,need_from_recent_nap_hours]
 Sleep Quality metrics: [sleep_performance_percentage,sleep_consistency_percentage,sleep_efficiency_percentage]
 ```
 

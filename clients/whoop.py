@@ -113,18 +113,19 @@ class Whoop:
                 }
             if item['score']:
                 if 'stage_summary' in item['score']:
-                    record['total_in_bed_time_milli'] = item['score']['stage_summary']['total_in_bed_time_milli']
-                    record['total_awake_time_milli'] = item['score']['stage_summary']['total_awake_time_milli']
-                    record['total_no_data_time_milli'] = item['score']['stage_summary']['total_no_data_time_milli']
-                    record['total_light_sleep_time_milli'] = item['score']['stage_summary']['total_light_sleep_time_milli'] 
-                    record['total_slow_wave_sleep_time_milli'] = item['score']['stage_summary']['total_slow_wave_sleep_time_milli']
-                    record['total_rem_sleep_time_milli'] = item['score']['stage_summary']['total_rem_sleep_time_milli']
+                    record['total_in_bed_hours'] = item['score']['stage_summary']['total_in_bed_time_milli']/3600000.0
+                    record['total_awake_hours']  = item['score']['stage_summary']['total_awake_time_milli']/3600000.0
+                    record['total_sleep_hours'] = record['total_in_bed_hours'] - record['total_awake_hours']
+                    record['total_no_data_hours'] = item['score']['stage_summary']['total_no_data_time_milli']/3600000.0
+                    record['total_light_sleep_hours'] = item['score']['stage_summary']['total_light_sleep_time_milli']/3600000.0
+                    record['total_slow_wave_sleep_hours'] = item['score']['stage_summary']['total_slow_wave_sleep_time_milli']/3600000.0
+                    record['total_rem_sleep_hours'] = item['score']['stage_summary']['total_rem_sleep_time_milli']/3600000.0
                     record['sleep_cycle_count'] = item['score']['stage_summary']['disturbance_count']
                 if 'sleep_needed' in item['score']:
-                    record['need_from_baseline_milli'] = item['score']['sleep_needed']['baseline_milli']
-                    record['need_from_sleep_debt_milli'] = item['score']['sleep_needed']['need_from_sleep_debt_milli']
-                    record['need_from_recent_strain_milli'] = item['score']['sleep_needed']['need_from_recent_strain_milli']
-                    record['need_from_recent_nap_milli'] = item['score']['sleep_needed']['need_from_recent_nap_milli']
+                    record['need_from_baseline_hours'] = item['score']['sleep_needed']['baseline_milli']/3600000.0
+                    record['need_from_sleep_debt_hours'] = item['score']['sleep_needed']['need_from_sleep_debt_milli']/3600000.0
+                    record['need_from_recent_strain_hours'] = item['score']['sleep_needed']['need_from_recent_strain_milli']/3600000.0
+                    record['need_from_recent_nap_hours'] = item['score']['sleep_needed']['need_from_recent_nap_milli']/3600000.0
                 record['respiratory_rate'] = item['score']['respiratory_rate']
                 record['sleep_performance_percentage'] = item['score']['sleep_performance_percentage']
                 record['sleep_consistency_percentage'] = item['score']['sleep_consistency_percentage']
