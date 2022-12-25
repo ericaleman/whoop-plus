@@ -55,7 +55,7 @@ By default, the CLI graphs 1 year of trends. To update this, adjust the DAYS con
 
 ## API Requests
 
-`WHOOP+` can make six different types of requests, pulling down Cycle/Recovery/Sleep/Workout collections for the last n days and pulling down basic profile information. 
+`WHOOP+` can also make six different types of requests, pulling down Cycle/Recovery/Sleep/Workout collections for the last n days and pulling down your basic profile information. 
 
 ### Get Basic Profile
 
