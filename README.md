@@ -1,5 +1,7 @@
 # WHOOP+ <!-- omit in toc -->
+
 ![plot](./assets/whoop_logo.png)
+
 Track long term trends in your health using your WHOOP device. Get your first month of WHOOP free at https://join.whoop.com/46A8F8.
 
 ![plot](./assets/sleep_quality.png)
