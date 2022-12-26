@@ -53,13 +53,6 @@ By default, the CLI graphs 6 months of trends. To update this, adjust the DAYS c
 >>>poetry run python main.py graph_trends  
 >>>Metric: [Select a metric from above]
 ```
-### Using the CLI
-By default, the CLI graphs 6 months of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
-
-```shell
->>>poetry run python main.py graph_trends  
->>>Metric: [Select a metric from above]
-```
 
 ## SQL
 
