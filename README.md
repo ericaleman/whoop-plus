@@ -67,8 +67,8 @@ By default, the CLI graphs 6 months of trends. To update this, adjust the DAYS c
 ```sql
 SELECT 
     cycle.day
-    , cycle.strain
-    , recovery.resting_heart_rate
+    ,cycle.strain
+    ,recovery.resting_heart_rate
 FROM cycle
 INNER JOIN recovery
     on recovery.cycle_id = cycle.id
