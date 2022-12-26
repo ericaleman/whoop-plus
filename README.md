@@ -2,7 +2,7 @@
 
 Track long term trends in your health using your WHOOP device. Get your first month of WHOOP free at https://join.whoop.com/46A8F8.
 
-![plot](./assets/sleep_quality.png)
+![plot](./assets/sleep.png)
 
 ## Contents <!-- omit in toc -->
 
