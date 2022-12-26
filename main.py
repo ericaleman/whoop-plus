@@ -8,7 +8,7 @@ import click
 from clients import whoop
 from utils import graphs
 
-DAYS = 365
+DAYS = 180
 
 @click.group(chain=True)
 def cli():

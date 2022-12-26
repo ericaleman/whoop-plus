@@ -9,6 +9,7 @@ Track long term trends in your health using your WHOOP device. Get your first mo
 - [Setup](#setup)
 - [CLI](#clo)
   - [Using the CLI](#using-the-cli)
+- [SQL](#sql)
 - [API Requests](#api-requests)
   - [Get Basic Profile](#get-basic-profile)
   - [Get Body Measurements](#get-body-measurements)
@@ -46,11 +47,31 @@ Sleep Quality metrics: [sleep_performance_percentage,sleep_consistency_percentag
 ```
 
 ### Using the CLI
-By default, the CLI graphs 1 year of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
+By default, the CLI graphs 6 months of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
 
 ```shell
 >>>poetry run python main.py graph_trends  
 >>>Metric: [Select a metric from above]
+```
+### Using the CLI
+By default, the CLI graphs 6 months of trends. To update this, adjust the DAYS constant in main.py. This will be changed to a CLI input in a future release.
+
+```shell
+>>>poetry run python main.py graph_trends  
+>>>Metric: [Select a metric from above]
+```
+
+## SQL
+
+`WHOOP+` allows you to query your WHOOP data using SQL. For example:
+```sql
+SELECT 
+    cycle.day
+    , cycle.strain
+    , recovery.resting_heart_rate
+FROM cycle
+INNER JOIN recovery
+    on recovery.cycle_id = cycle.id
 ```
 
 ## API Requests
